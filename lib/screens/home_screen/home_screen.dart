@@ -189,22 +189,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-//       DateTime transactionDate =
-            //           DateTime.fromMillisecondsSinceEpoch(
-            //         int.parse(transaction.id),
-            //       );
-            //       String monthWithDate =
-            //           DateFormat('MMM \n dd').format(transactionDate);
-
-            //               child: Text(
-            //                 monthWithDate,
-
-            //             trailing: Text(
-            //               '₹${transaction.amount.toString()}',
-            //               style: TextStyle(color:
-
-            //             transaction.type.index == 0 ?Colors.green: Colors.red ,fontSize: 18),
-
-            //   itemCount: uiRefreshController.transactionDetails.length,
-            // ),
