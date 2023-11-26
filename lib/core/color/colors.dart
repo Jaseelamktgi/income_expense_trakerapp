@@ -7,3 +7,4 @@ const darkColor = Colors.black;
 const topContainerColor = Color.fromARGB(255, 5, 159, 146);
 const greyText =Color.fromARGB(255, 153, 146, 146);
 const warning =Colors.red;
+const green = Colors.green;

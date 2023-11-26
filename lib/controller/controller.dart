@@ -1,21 +1,34 @@
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:income_expense_trakerapp/db/models/transactions/transaction_model.dart';
 
-class UIRefreshController extends GetxController {
-  List<TransactionModel> transactionDetails = <TransactionModel>[].obs;
-   
+class TransactionController extends GetxController {
+  List _transactions = [];
 
-  @override
-  void onInit() {
-    super.onInit();
-    _loadAllTransactions();
+  List get transactions => _transactions;
+
+  setTransactions(List data) {
+    _transactions = data;
+    update();
   }
 
-  Future<void> _loadAllTransactions() async {
-    final transactionBox =
-        await Hive.openBox<TransactionModel>('transaction_details');
-    transactionDetails = transactionBox.values.toList();
-    print(transactionDetails.length);
+  double get totalBalance {
+    return _transactions.fold(0, (sum, transaction) {
+      print(transaction.amount);
+      return sum +
+          (transaction.type == 'Income'
+              ? transaction.amount
+              :transaction.amount);
+    });
+  }
+
+  double get totalIncome {
+    return _transactions
+        .where((transaction) => transaction.type == 'Income')
+        .fold(0, (sum, transaction) => sum + transaction.amount);
+  }
+
+  double get totalExpense {
+    return _transactions
+        .where((transaction) => transaction.type == 'Expense')
+        .fold(0, (sum, transaction) => sum + transaction.amount);
   }
 }

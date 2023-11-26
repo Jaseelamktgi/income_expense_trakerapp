@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:income_expense_trakerapp/core/color/colors.dart';
+import 'package:income_expense_trakerapp/screens/home_screen/widgets/transactionlist.dart';
 import 'package:income_expense_trakerapp/screens/statistics/line_chart.dart';
 import 'package:income_expense_trakerapp/screens/widgets/bottom_navigation.dart';
 
@@ -67,7 +68,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
           // Curved fl_chart
           Container(
             height: 200,
-            child: _buildChart(),
+            child: ReportPage(),
           ),
           Row(
             children: [
@@ -89,8 +90,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                       )))
             ],
           ),
-          buildCard(0, " Starbucks", "Jan 12, 2022", "\$7882", 'img'),
-          buildCard(1, " Transfer", "Jan 2, 2023", "\$7882", 'img'),
+          Expanded(
+              child: TransactionsList(),
+            )
         ],
       ),
       bottomNavigationBar: Container(
@@ -120,7 +122,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             }
           });
           // Fetch and update data based on the selected time range
-        _updateChartData();
 
         },
         child: Text(
@@ -137,42 +138,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       ),
     );
   }
-
-  Widget buildCard(
-      int index, String title, String subtitle, String value, String img) {
-    return Card(
-      elevation: 0,
-      color: selectedCardIndex == index ? defaultColor : null,
-      shape: RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.circular(25.0), // Adjust the radius as needed
-      ),
-      child: ListTile(
-        selectedColor: selectedCardIndex == index ? defaultColor : darkColor,
-        leading: CircleAvatar(),
-        title: Text(
-          title,
-          style: TextStyle(
-              color: selectedCardIndex == index ? whiteText : darkColor,
-              fontSize: 16),
-        ),
-        subtitle: Text(subtitle,
-            style: TextStyle(
-                color: selectedCardIndex == index ? whiteText : darkColor,
-                fontSize: 13)),
-        trailing: Text(value,
-            style: TextStyle(
-                color: selectedCardIndex == index ? whiteText : darkColor,
-                fontSize: 18)),
-        onTap: () {
-          setState(() {
-            selectedCardIndex = index;
-          });
-        },
-      ),
-    );
-  }
-
   Widget _buildCategoryTypeButton(String categoryType) {
   bool isSelected = selectedCategoryType == categoryType;
 
@@ -182,7 +147,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         selectedCategoryType = categoryType;
       });
       // Fetch and update data based on the selected category type
-      _updateChartData();
+      // _updateChartData();
     },
     style: ElevatedButton.styleFrom(
       backgroundColor: isSelected ?defaultColor :greyText, 
@@ -197,23 +162,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
 }
 
 
-  Widget _buildChart() {
-    // Use the fl_chart library to display the chart
-    // Customize this based on your data and requirements
-    // Example: LineChart or LineChart.fromDateTimeMaps
-    return LineChart(
-      LineChartData(
-        // Configuration for the chart data
-        // Add your data and styling here
-        // Example: gridData, titlesData, borderData, lineBarsData, ...
-      ),
-    );
-  }
-
-  void _updateChartData() {
-    // Fetch data from Hive based on selectedTimeRange and selectedCategoryType
-    // Filter and process the data
-    // Update the chart data
-    // Example: setState(() { chartData = newData; });
-  }
+ 
+  
 }

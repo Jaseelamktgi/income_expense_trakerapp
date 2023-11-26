@@ -130,6 +130,7 @@ class RegistrationPage extends StatelessWidget {
           width: 300,
           child: TextFormField(
             controller: controller,
+            // keyboardType: TextInputType.emailAddress,
             obscureText: isObscure,
             decoration: InputDecoration(
               fillColor: whiteText,
