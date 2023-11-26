@@ -16,7 +16,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   int selectedIndex = -1;
   int selectedCardIndex = -1;
     String selectedTimeRange = 'Month';
-  String selectedCategoryType = 'Income'; // Default to Income
+  String selectedCategoryType = 'Income'; 
 
   @override
   Widget build(BuildContext context) {
